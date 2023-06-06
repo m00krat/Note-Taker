@@ -3,21 +3,21 @@ const fs = require('fs');
 const path = require('path');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname)));
 
 const getNotes = () => {
-  const data = fs.readFileSync(path.join(__dirname, 'public', 'assets', 'db', 'db.json'), 'utf8');
+  const data = fs.readFileSync(path.join(__dirname, 'db', 'db.json'), 'utf8');
   return JSON.parse(data);
 };
 
 const saveNotes = (newNote) => {
   const notes = getNotes();
   notes.push(newNote);
-  fs.writeFileSync(path.join(__dirname, 'public', 'assets', 'db', 'db.json'), JSON.stringify(notes));
+  fs.writeFileSync(path.join(__dirname, 'db', 'db.json'), JSON.stringify(notes));
 };
 
 app.get('/', (req, res) => {
