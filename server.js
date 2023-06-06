@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 3001;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static(path.join(__dirname)));
+app.use(express.static(path.join(__dirname, 'public')));
 
 const getNotes = () => {
   const data = fs.readFileSync(path.join(__dirname, 'db', 'db.json'), 'utf8');
